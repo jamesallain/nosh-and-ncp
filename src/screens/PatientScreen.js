@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Platform } from 'react-native';
 import { Button } from 'native-base';
 import { graphql, QueryRenderer } from 'react-relay'
 
@@ -31,17 +31,23 @@ const PatientQuery = graphql`
     `
 
 class PatientScreen extends Component {
-  static navigationOptions = ({navigation}) => ({
-      title: 'Review Jobs',
-      headerRight:  (<Button
-        title="Settings"
-        onPress={() => navigation.navigate('welcome') }
-        />
-        
+  static navigationOptions = ({ navigate }) => ({
+      title: 'Search Patients',
+      headerRight:  (
+        <Button
+          title="Settings"
+          onPress={() => navigate('welcome') }
+          backgroundColor="rgba(0,0,0,0)"
+          color="rgba(0, 122, 255, 1"
+        />          
         ),
-      headerTitleStyle: {
-        marginTop: 24
-      }
+      style: {
+        marginTop: Platform.OS === 'android' ? 24 : 0
+      },
+      //might have to use this instead
+      // headerTitleStyle: {
+      //   marginTop: 24
+      // }
   });
 
   
